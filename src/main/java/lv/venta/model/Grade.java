@@ -39,12 +39,13 @@ public class Grade {
 	@JoinColumn(name = "Ids")
 	private Student student;
 	
-//	@Column(name = "Course")
-//	private Course course;
+	@ManyToOne
+	@JoinColumn(name = "Idc")
+	private Course course;
 	
 	public Grade(int grvalue, Student student, Course course) {
 		setGrvalue(grvalue);
 		setStudent(student);
-//		setCourse(course);
+		setCourse(course);
 	}
 }
