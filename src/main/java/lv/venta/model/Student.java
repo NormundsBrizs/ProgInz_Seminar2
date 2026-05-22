@@ -42,6 +42,7 @@ public class Student {
 	private String surname;
 	
 	public Student(String name, String surname) {
-		//TODO izsaukt set funkcijas 
+		setName(name);
+		setSurname(surname);
 	}
 }
