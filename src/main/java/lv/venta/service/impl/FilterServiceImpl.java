@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import lv.venta.enums.Degree;
 import lv.venta.model.Course;
 import lv.venta.model.Grade;
+import lv.venta.model.Student;
 import lv.venta.repo.ICourseRepo;
 import lv.venta.repo.IGradeRepo;
 import lv.venta.repo.IProfessorRepo;
@@ -92,4 +93,21 @@ public class FilterServiceImpl implements IFilterService {
 		return resultFromDB;
 	}
 
+	@Override
+	public ArrayList<Student> filterStudentsByFailedGrades() throws Exception {
+		if (studRepo.count() == 0) {
+			throw new Exception("No students found");
+		}
+		if (gradeRepo.count() == 0) {
+			throw new Exception("No grades found");
+		}
+		
+		ArrayList<Student> resultFromDB = studRepo.findByGradesGrvalueLessThan(4);
+		
+		if (resultFromDB.isEmpty()) {
+			throw new Exception("No students with failing grades");
+		}
+		
+		return resultFromDB;
+	}
 }
