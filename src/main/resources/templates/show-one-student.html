@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org" >
+	
+<body>
+	
+	<h1>Studenta dati:</h1>
+	
+	<table border="1px">
+		<tr>
+			<td>Id</td>
+			<td>Vārds</td>
+			<td>Uzvārds</td>
+			<td>Atzīmes</td>
+		</tr>
+		
+		<tr>
+			<td th:text="${package.ids}" ></td>
+			<td th:text="${package.name}" ></td>
+			<td th:text="${package.surname}" ></td>
+			<td th:text="${package.grades}" ></td>
+		</tr>
+		
+	</table>
+	
+
+	
+</body>
+
+
+
+</html>

@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org" >
+	
+<body>
+	
+	<h1>Studentu dati:</h1>
+	<h2 th:text=${info}></h2>
+	
+	<table border="1px">
+		<tr>
+			<td>Id</td>
+			<td>Vārds</td>
+			<td>Uzvārds</td>
+			<td>Atzīmes</td>
+		</tr>
+		<th:block th:each="stud : ${package}">
+		<tr>
+			<td th:text="${stud.ids}" ></td>
+			<td th:text="${stud.name}" ></td>
+			<td th:text="${stud.surname}" ></td>
+			<td th:text="${stud.grades}" ></td>
+		</tr>
+		</th:block>
+	</table>
+	
+
+	
+</body>
+
+
+
+</html>
