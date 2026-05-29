@@ -26,6 +26,7 @@ public class FilterServiceImpl implements IFilterService {
 	@Autowired
 	private ICourseRepo courseRepo;
 	
+	@Autowired
 	private IProfessorRepo profRepo;
 	
 	@Override
@@ -78,7 +79,7 @@ public class FilterServiceImpl implements IFilterService {
 		if (degree == null) {
 			throw new Exception("Invalid input");
 		}
-		if (profRepo.existsByDegree(degree)) {
+		if (!profRepo.existsByDegree(degree)) {
 			throw new Exception("Professor(s) with " + degree + " degree do(es)n't exist");
 		}
 		
