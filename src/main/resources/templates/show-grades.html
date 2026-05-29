@@ -1,0 +1,33 @@
+<html xmlns:th="http://www.thymeleaf.org" >
+	
+<body>
+	
+	<h1>Atzīmes:</h1>
+	<h2 th:text=${info}></h2>
+	
+	<table border="1px">
+		<tr>
+			<td>Id</td>
+			<td>Vērtība</td>
+			<td>Studenta vārds</td>
+			<td>Studenta uzvārds</td>
+			<td>Kursa nosaukums</td>
+		</tr>
+		<th:block th:each="gr : ${package}">
+		<tr>
+			<td th:text="${gr.idg}" ></td>
+			<td th:text="${gr.grvalue}" ></td>
+			<td th:text="${gr.student.name}" ></td>
+			<td th:text="${gr.student.surname}" ></td>
+			<td th:text="${gr.course.title}" ></td>
+		</tr>
+		</th:block>
+	</table>
+	
+
+	
+</body>
+
+
+
+</html>
