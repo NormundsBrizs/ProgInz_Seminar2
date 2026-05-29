@@ -59,7 +59,7 @@ public class FilterServiceImpl implements IFilterService {
 		if (title == null || title.isEmpty() || !title.matches("[A-Ž]{1}[A-Ža-ž0-9 ]{3,40}")) {
 			throw new Exception("Invalid input");
 		}
-		if (courseRepo.existsByTitle(title)) {
+		if (!courseRepo.existsByTitle(title)) {
 			throw new Exception("Course with title " + title + " does not exist");
 		}
 		
