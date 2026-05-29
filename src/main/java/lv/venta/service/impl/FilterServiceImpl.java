@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import lv.venta.enums.Degree;
 import lv.venta.model.Course;
 import lv.venta.model.Grade;
+import lv.venta.repo.ICourseRepo;
 import lv.venta.repo.IGradeRepo;
+import lv.venta.repo.IProfessorRepo;
 import lv.venta.repo.IStudentRepo;
 import lv.venta.service.IFilterService;
 
@@ -20,6 +22,11 @@ public class FilterServiceImpl implements IFilterService {
 	
 	@Autowired
 	private IGradeRepo gradeRepo;
+	
+	@Autowired
+	private ICourseRepo courseRepo;
+	
+	private IProfessorRepo profRepo;
 	
 	@Override
 	public ArrayList<Grade> filterGradesByStudentId(long id) throws Exception {
@@ -44,14 +51,44 @@ public class FilterServiceImpl implements IFilterService {
 
 	@Override
 	public ArrayList<Grade> filterGradesByCourseTitle(String title) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		if (gradeRepo.count() == 0) {
+			throw new Exception("No grades found");
+		}
+		if (title == null || title.isEmpty() || !title.matches("[A-Ž]{1}[A-Ža-ž0-9 ]{3,40}")) {
+			throw new Exception("Invalid input");
+		}
+		if (courseRepo.existsByTitle(title)) {
+			throw new Exception("Course with title " + title + " does not exist");
+		}
+		
+		ArrayList<Grade> resultFromDB = gradeRepo.findByCourseTitle(title);
+		
+		if (resultFromDB.isEmpty()) {
+			throw new Exception("No grades found for course with title " + title);
+		}
+		
+		return resultFromDB;
 	}
 
 	@Override
 	public ArrayList<Course> filterCoursesByProfessorDegree(Degree degree) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		if (courseRepo.count() == 0) {
+			throw new Exception("No courses found");
+		}
+		if (degree == null) {
+			throw new Exception("Invalid input");
+		}
+		if (profRepo.existsByDegree(degree)) {
+			throw new Exception("Professor(s) with " + degree + " degree do(es)n't exist");
+		}
+		
+		ArrayList<Course> resultFromDB = courseRepo.findByProfessorDegree(degree);
+		
+		if (resultFromDB.isEmpty()) {
+			throw new Exception("No courses found for degree: " + degree);
+		}
+		
+		return resultFromDB;
 	}
 
 }
