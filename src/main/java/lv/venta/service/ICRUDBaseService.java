@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public interface ICRUDBaseService<Ttype> {
 	
+	public abstract void create(Ttype newObject) throws Exception;
+	
 	public abstract ArrayList<Ttype> retrieveAll() throws Exception;
 	
 	public abstract Ttype retrieveById(long id) throws Exception;
