@@ -9,8 +9,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -48,9 +49,9 @@ public class Course {
 	@Max(40)
 	private int creditpoints;
 	
-	@OneToOne
-	@JoinColumn(name = "Idp")
-	private Professor professor;
+	@ManyToMany
+	@JoinTable(name = "CourseProfTable", joinColumns = @JoinColumn(name = "idc"), inverseJoinColumns = @JoinColumn(name = "idp"))
+	private Collection<Professor> professors = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "course")
 	@ToString.Exclude
@@ -59,6 +60,12 @@ public class Course {
 	public Course(String title, int creditpoints, Professor professor) {
 		setTitle(title);
 		setCreditpoints(creditpoints);
-		setProfessor(professor);
+		addProfessor(professor);
+	}
+	
+	public void addProfessor(Professor prof) {
+		if (!professors.contains(prof)) {
+			professors.add(prof);
+		}
 	}
 }
