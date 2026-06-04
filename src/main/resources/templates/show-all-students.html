@@ -17,7 +17,10 @@
 			<td th:text="${stud.ids}" ></td>
 			<td th:text="${stud.name}" ></td>
 			<td th:text="${stud.surname}" ></td>
-			<td th:text="${stud.grades}" ></td>
+			
+			<td th:each="gr : ${stud.grades}">
+				<p th:text="${gr.grvalue}"></p>
+			</td>
 		</tr>
 		</th:block>
 	</table>

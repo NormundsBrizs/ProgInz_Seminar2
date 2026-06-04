@@ -16,4 +16,6 @@ public interface IFilterService {
 	public abstract ArrayList<Course> filterCoursesByProfessorDegree(Degree degree) throws Exception;
 	
 	public abstract ArrayList<Student> filterStudentsByFailedGrades() throws Exception;
+	
+	public abstract ArrayList<Grade> filterFailedGradesByCourseTitle(String title) throws Exception;
 }

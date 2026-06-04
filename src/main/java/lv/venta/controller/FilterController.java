@@ -60,4 +60,16 @@ public class FilterController {
 			return "error-page";
 		}
 	}
+	
+	// atzimes nesekmigas konkreta prieksmeta
+	@GetMapping("/grade/course/{title}/failed") // localhost:8080/filter/grade/course/Tīmekļa tehnoloģijas/failed
+	public String getControllerFailedGradesByCourseTitle(@PathVariable(name = "title") String title, Model model) {
+		try {
+			model.addAttribute("package", filterService.filterFailedGradesByCourseTitle(title));
+			return "show-grades";
+		} catch (Exception e) {
+			model.addAttribute("package", e.getMessage());
+			return "error-page";
+		}
+	}
 }

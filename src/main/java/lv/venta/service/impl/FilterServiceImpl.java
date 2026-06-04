@@ -110,4 +110,25 @@ public class FilterServiceImpl implements IFilterService {
 		
 		return resultFromDB;
 	}
+
+	@Override
+	public ArrayList<Grade> filterFailedGradesByCourseTitle(String title) throws Exception {
+		if (gradeRepo.count() == 0) {
+			throw new Exception("No grades found");
+		}
+		if (title == null || title.isEmpty() || !title.matches("[A-Ž]{1}[A-Ža-ž0-9 ]{3,40}")) {
+			throw new Exception("Invalid input");
+		}
+		if (!courseRepo.existsByTitle(title)) {
+			throw new Exception("Course with title " + title + " does not exist");
+		}
+		
+		ArrayList<Grade> resultFromDB = gradeRepo.findByCourseTitleLessThan(title, 4);
+		
+		if (resultFromDB.isEmpty()) {
+			throw new Exception("No failed grades found for course with title " + title);
+		}
+		
+		return resultFromDB;
+	}
 }

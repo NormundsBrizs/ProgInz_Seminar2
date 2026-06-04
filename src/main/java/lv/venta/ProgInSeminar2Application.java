@@ -44,7 +44,7 @@ public class ProgInSeminar2Application {
 				
 				Grade g1 = new Grade(3, s1, c1);
 				Grade g2 = new Grade(6, s1, c2);
-				Grade g3 = new Grade(1, s2, c1);
+				Grade g3 = new Grade(8, s2, c1);
 				Grade g4 = new Grade(4, s2, c2);
 				gradeRepo.saveAll(Arrays.asList(g1, g2, g3, g4));
 			}

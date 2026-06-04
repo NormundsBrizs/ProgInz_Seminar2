@@ -16,7 +16,10 @@
 			<td th:text="${package.ids}" ></td>
 			<td th:text="${package.name}" ></td>
 			<td th:text="${package.surname}" ></td>
-			<td th:text="${package.grades}" ></td>
+			
+			<td th:each="gr : ${stud.grades}">
+				<p th:text="${gr.grvalue}"></p>
+			</td>
 		</tr>
 		
 	</table>
