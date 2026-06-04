@@ -15,7 +15,8 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-//@Table(name = "StudentTable")    if inheritance strategy is SINGLE.TABLE
+// comment if single.table
+@Table(name = "StudentTable")
 @Entity
 public class Student extends Person{
 	

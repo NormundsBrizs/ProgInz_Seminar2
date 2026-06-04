@@ -24,7 +24,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "PersonTable")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
 
 	@Column(name = "Idp")
