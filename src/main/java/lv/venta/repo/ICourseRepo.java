@@ -11,6 +11,6 @@ public interface ICourseRepo extends CrudRepository<Course, Long> {
 
 	boolean existsByTitle(String title);
 
-	ArrayList<Course> findByProfessorDegree(Degree degree);
+	ArrayList<Course> findByProfessorsDegree(Degree degree);
 	
 }

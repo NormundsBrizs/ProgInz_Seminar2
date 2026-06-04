@@ -84,7 +84,7 @@ public class FilterServiceImpl implements IFilterService {
 			throw new Exception("Professor(s) with " + degree + " degree do(es)n't exist");
 		}
 		
-		ArrayList<Course> resultFromDB = courseRepo.findByProfessorDegree(degree);
+		ArrayList<Course> resultFromDB = courseRepo.findByProfessorsDegree(degree);
 		
 		if (resultFromDB.isEmpty()) {
 			throw new Exception("No courses found for degree: " + degree);

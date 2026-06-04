@@ -10,18 +10,19 @@
 			<td>Id</td>
 			<td>Nosaukums</td>
 			<td>Kredītpunkti</td>
-			<td>Profesora vārds</td>
-			<td>Profesora uzvārds</td>
-			<td>Atzīmes</td>
+			<td>Profesors Nr.1</td>
+			<td>Profesors Nr.2</td>
 		</tr>
 		<th:block th:each="course : ${package}">
 		<tr>
 			<td th:text="${course.idc}" ></td>
 			<td th:text="${course.title}" ></td>
 			<td th:text="${course.creditpoints}" ></td>
-			<td th:text="${course.professor.name}" ></td>
-			<td th:text="${course.professor.surname}" ></td>
-			<td th:text="${course.grades}" ></td>
+			<td th:each="prof : ${course.professors}">
+				<p th:text=${prof.name}></p>
+				<p th:text=${prof.surname}></p>
+				<p th:text=${prof.degree}></p>
+			</td>
 		</tr>
 		</th:block>
 	</table>
