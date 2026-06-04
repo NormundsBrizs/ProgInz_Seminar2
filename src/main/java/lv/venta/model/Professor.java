@@ -17,7 +17,7 @@ import lv.venta.enums.Degree;
 @Setter
 @NoArgsConstructor
 @ToString
-@Table(name = "ProfessorTable")
+//@Table(name = "ProfessorTable")  if inheritance strategy is SINGLE.TABLE
 @Entity
 public class Professor extends Person{
 	
