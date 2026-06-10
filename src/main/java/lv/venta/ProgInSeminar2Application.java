@@ -25,7 +25,8 @@ public class ProgInSeminar2Application {
 	}
 
 	@Bean
-	public CommandLineRunner saveDataInDB(IStudentRepo studRepo, IProfessorRepo profRepo, ICourseRepo courseRepo, IGradeRepo gradeRepo) {
+	public CommandLineRunner saveDataInDB(IStudentRepo studRepo, IProfessorRepo profRepo, 
+			ICourseRepo courseRepo, IGradeRepo gradeRepo) {
 		return new CommandLineRunner() {
 			
 			@Override
