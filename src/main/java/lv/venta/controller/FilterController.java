@@ -72,4 +72,26 @@ public class FilterController {
 			return "error-page";
 		}
 	}
+	
+	@GetMapping("/perfect-grades") // localhost:8080/filter/perfect-grades
+	public String getPerfectGrades(Model model) {
+		try {
+			model.addAttribute("package", filterService.filterAllPerfectGrades());
+			return "show-grades";
+		} catch (Exception e) {
+			model.addAttribute("package", e.getMessage());
+			return "error-page";
+		}
+	}
+	
+	@GetMapping("/course/4") // localhost:8080/filter/course/4
+	public String getCoursesWithLessThan4CreditPoints(Model model) {
+		try {
+			model.addAttribute("package", filterService.filterCoursesByCreditPointsLessThan4());
+			return "show-courses";
+		} catch (Exception e) {
+			model.addAttribute("package", e.getMessage());
+			return "error-page";
+		}
+	}
 }

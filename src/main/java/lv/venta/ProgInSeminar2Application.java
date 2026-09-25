@@ -41,7 +41,7 @@ public class ProgInSeminar2Application {
 				studRepo.saveAll(Arrays.asList(s1, s2));
 				
 				Course c1 = new Course("Programmēšana JAVA", 4, p1);
-				Course c2 = new Course("Tīmekļa tehnoloģijas", 6, p2);
+				Course c2 = new Course("Tīmekļa tehnoloģijas", 3, p2);
 				Course c3 = new Course("Programmatūras inženierija I", 6, p1);
 				c3.addProfessor(p3);
 				courseRepo.saveAll(Arrays.asList(c1, c2, c3));
@@ -56,7 +56,8 @@ public class ProgInSeminar2Application {
 				Grade g2 = new Grade(6, s1, c2);
 				Grade g3 = new Grade(8, s2, c1);
 				Grade g4 = new Grade(4, s2, c2);
-				gradeRepo.saveAll(Arrays.asList(g1, g2, g3, g4));
+				Grade g5 = new Grade(10, s2, c1);
+				gradeRepo.saveAll(Arrays.asList(g1, g2, g3, g4, g5));
 			}
 		};
 	}

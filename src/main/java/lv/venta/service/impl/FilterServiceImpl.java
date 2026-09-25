@@ -131,4 +131,34 @@ public class FilterServiceImpl implements IFilterService {
 		
 		return resultFromDB;
 	}
+
+	@Override
+	public ArrayList<Grade> filterAllPerfectGrades() throws Exception {
+		if (gradeRepo.count() == 0) {
+			throw new Exception("No grades found");
+		}
+		
+		ArrayList<Grade> resultFromDB = gradeRepo.findByGrvalueEquals(10);
+		
+		if (resultFromDB.isEmpty()) {
+			throw new Exception("No grades found");
+		}
+		
+		return resultFromDB;
+	}
+
+	@Override
+	public ArrayList<Course> filterCoursesByCreditPointsLessThan4() throws Exception {
+		if (courseRepo.count() == 0) {
+			throw new Exception("No courses found");
+		}
+		
+		ArrayList<Course> resultFromDB = courseRepo.findByCreditpointsLessThan(4);
+		
+		if (resultFromDB.isEmpty()) {
+			throw new Exception("No courses found");
+		}
+		
+		return resultFromDB;
+	}
 }

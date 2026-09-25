@@ -18,4 +18,8 @@ public interface IFilterService {
 	public abstract ArrayList<Student> filterStudentsByFailedGrades() throws Exception;
 	
 	public abstract ArrayList<Grade> filterFailedGradesByCourseTitle(String title) throws Exception;
+	
+	public abstract ArrayList<Grade> filterAllPerfectGrades() throws Exception;
+	
+	public abstract ArrayList<Course> filterCoursesByCreditPointsLessThan4() throws Exception;
 }

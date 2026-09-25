@@ -13,5 +13,7 @@ public interface IGradeRepo extends CrudRepository<Grade, Long> {
 	ArrayList<Grade> findByCourseTitle(String title);
 
 	ArrayList<Grade> findByCourseTitleLessThan(String title, int i);
+
+	ArrayList<Grade> findByGrvalueEquals(int i);
 	
 }

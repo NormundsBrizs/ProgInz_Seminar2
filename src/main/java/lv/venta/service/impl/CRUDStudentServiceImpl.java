@@ -22,8 +22,14 @@ public class CRUDStudentServiceImpl implements ICRUDStudentService {
 	
 	@Override
 	public void create(Student newObject) throws Exception {
-		// TODO Auto-generated method stub
+		if (newObject == null) {
+			throw new Exception("No student given");
+		}
+		if (studRepo.existsByName(newObject.getName()) && studRepo.existsByName(newObject.getSurname())) {
+			throw new Exception("Student already exists");
+		}
 		
+		studRepo.save(newObject);
 	}
 
 	@Override
