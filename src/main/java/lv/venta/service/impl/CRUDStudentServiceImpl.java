@@ -2,6 +2,7 @@ package lv.venta.service.impl;
 
 import java.util.ArrayList;
 
+import lv.venta.repo.ICourseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +15,17 @@ import lv.venta.service.ICRUDStudentService;
 @Service
 public class CRUDStudentServiceImpl implements ICRUDStudentService {
 
+	private final ICourseRepo ICourseRepo;
+
 	@Autowired
 	private IStudentRepo studRepo;
 	
 	@Autowired
 	private IGradeRepo gradeRepo;
+
+	CRUDStudentServiceImpl(ICourseRepo ICourseRepo) {
+		this.ICourseRepo = ICourseRepo;
+	}
 	
 	@Override
 	public void create(Student newObject) throws Exception {
@@ -27,6 +34,10 @@ public class CRUDStudentServiceImpl implements ICRUDStudentService {
 		}
 		if (studRepo.existsByName(newObject.getName()) && studRepo.existsByName(newObject.getSurname())) {
 			throw new Exception("Student already exists");
+		}
+		
+		if (newObject.getName() == null || newObject.getSurname() == null) {
+			throw new Exception("Invalid data");
 		}
 		
 		studRepo.save(newObject);
