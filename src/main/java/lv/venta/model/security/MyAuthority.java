@@ -43,8 +43,8 @@ public class MyAuthority {
 	
 	@ManyToMany
 	@JoinTable(name = "AuthUserTable", 
-	inverseJoinColumns = @JoinColumn(name = "MyUserTable"), 
-	joinColumns = @JoinColumn(name = "MyAuthorityTable"))
+	inverseJoinColumns = @JoinColumn(name = "Idu"), 
+	joinColumns = @JoinColumn(name = "Ida"))
 	@ToString.Exclude
 	private Collection<MyUser> users = new ArrayList<MyUser>();
 	
