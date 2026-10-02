@@ -1,12 +1,15 @@
 package lv.venta.model.security;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -40,12 +43,24 @@ public class MyUser {
 	@NotEmpty
 	private String password;
 	
-	@OneToOne(fetch = FetchType.EAGER)
-	private MyAuthority authority;
+	@ManyToMany(mappedBy = "users")
+	private Collection<MyAuthority> authorities = new ArrayList<MyAuthority>();
+	
+	public void addAuthority(MyAuthority authority) {
+		if (!authorities.contains(authority)) {
+			authorities.add(authority);
+		}
+	}
+	
+	public void removeAuthority(MyAuthority authority) {
+		if (authorities.contains(authority)) {
+			authorities.remove(authority);
+		}
+	}
 	
 	public MyUser(String username, String password, MyAuthority authority) {
 		setUsername(username);
 		setPassword(password);
-		setAuthority(authority);
+		addAuthority(authority);
 	}
 }
