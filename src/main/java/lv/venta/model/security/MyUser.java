@@ -58,9 +58,11 @@ public class MyUser {
 		}
 	}
 	
-	public MyUser(String username, String password, MyAuthority authority) {
+	public MyUser(String username, String password, MyAuthority ... inputAuthorities) {
 		setUsername(username);
 		setPassword(password);
-		addAuthority(authority);
+		for(MyAuthority tempA : inputAuthorities) {
+			addAuthority(tempA);
+		}
 	}
 }
