@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -41,7 +42,7 @@ public class MyAuthority {
 	@Pattern(regexp = "[A-Z_]{3,10}")
 	private String title;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "AuthUserTable", 
 	inverseJoinColumns = @JoinColumn(name = "Idu"), 
 	joinColumns = @JoinColumn(name = "Ida"))

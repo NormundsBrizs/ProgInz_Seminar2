@@ -43,7 +43,7 @@ public class MyUser {
 	@NotEmpty
 	private String password;
 	
-	@ManyToMany(mappedBy = "users")
+	@ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
 	private Collection<MyAuthority> authorities = new ArrayList<MyAuthority>();
 	
 	public void addAuthority(MyAuthority authority) {
