@@ -20,7 +20,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-@Table(name = "UserTable")
+@Table(name = "MyUserTable")
 @Entity
 public class MyUser {
 	

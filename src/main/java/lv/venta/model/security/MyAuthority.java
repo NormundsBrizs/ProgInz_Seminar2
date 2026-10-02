@@ -10,6 +10,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-@Table(name = "AuthorityTable")
+@Table(name = "MyAuthorityTable")
 @Entity
 public class MyAuthority {
 	
@@ -30,9 +31,10 @@ public class MyAuthority {
 	@Setter(value = AccessLevel.NONE)
 	private long ida;
 	
-	@Column(name = "Title")
+	@Column(name = "Title", unique = true)
 	@NotNull
 	@NotEmpty
+	@Pattern(regexp = "[A-Z_]{3,10}")
 	private String title;
 	
 	@ManyToOne
