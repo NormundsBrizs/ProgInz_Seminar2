@@ -6,4 +6,8 @@ import lv.venta.model.security.MyUser;
 
 public interface IMyUserRepo extends CrudRepository<MyUser, Long> {
 
+	boolean existsByUsername(String username);
+
+	MyUser findByUsername(String username);
+
 }
