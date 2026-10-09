@@ -31,7 +31,7 @@ public class StudentCRUDController {
 	}
 	
 	@GetMapping("/all/{id}") //localhost:8080/student/crud/all/1
-	public ResponseEntity<?> getControllerRetrieveStudentById(@PathVariable(name = "id") long id, Model model) {
+	public ResponseEntity<?> getControllerRetrieveStudentById(@PathVariable(name = "id") long id) {
 		try {
 			return new ResponseEntity<Student>(studService.retrieveById(id), HttpStatusCode.valueOf(200));
 		} catch (Exception e) {
