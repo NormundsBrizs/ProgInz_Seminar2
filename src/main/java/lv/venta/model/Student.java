@@ -8,7 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -18,6 +20,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lv.venta.model.security.MyUser;
 
 @Getter
 @Setter
@@ -49,8 +52,13 @@ public class Student {
 	@ToString.Exclude
 	private Collection<Grade> grades = new ArrayList<Grade>();
 	
-	public Student(String name, String surname) {
+	@OneToOne
+	@JoinColumn(name = "Idu")
+	private MyUser user;
+	
+	public Student(String name, String surname, MyUser user) {
 		setName(name);
 		setSurname(surname);
+		setUser(user);
 	}
 }

@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -18,6 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lv.venta.model.Student;
 
 @Getter
 @Setter
@@ -45,6 +47,11 @@ public class MyUser {
 	
 	@ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
 	private Collection<MyAuthority> authorities = new ArrayList<MyAuthority>();
+	
+	@OneToOne(mappedBy = "user")
+	private Student student;
+	
+	// TODO add professor
 	
 	public void addAuthority(MyAuthority authority) {
 		if (!authorities.contains(authority)) {
