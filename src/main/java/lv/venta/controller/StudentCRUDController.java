@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,6 +44,16 @@ public class StudentCRUDController {
 	public ResponseEntity<?> getDeleteStudentById(@PathVariable(name = "id") long id) {
 		try {
 			studService.deleteById(id);
+			return new ResponseEntity<ArrayList<Student>>(studService.retrieveAll(), HttpStatusCode.valueOf(200));
+		} catch (Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatusCode.valueOf(409));
+		}
+	}
+	
+	@PutMapping("/update/{id}") // localhost:8080/student/crud/update/1
+	public ResponseEntity<?> putUpdateStudentById(@PathVariable(name = "id") long id) {
+		try {
+			studService.updateById(id, null, null);
 			return new ResponseEntity<ArrayList<Student>>(studService.retrieveAll(), HttpStatusCode.valueOf(200));
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatusCode.valueOf(409));
