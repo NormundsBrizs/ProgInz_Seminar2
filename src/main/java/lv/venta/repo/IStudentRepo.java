@@ -11,6 +11,8 @@ public interface IStudentRepo extends CrudRepository<Student, Long> {
 	ArrayList<Student> findByGradesGrvalueLessThan(int i);
 
 	boolean existsByName(String name);
+
+	Student findByUserUsername(String sessionUsername);
 	
 	
 }

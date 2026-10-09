@@ -9,7 +9,7 @@ import lv.venta.model.Student;
 
 public interface IFilterService {
 	
-	public abstract ArrayList<Grade> filterGradesByStudentId(long id) throws Exception;
+	public abstract ArrayList<Grade> filterGradesByStudentId(long id, String sessionUsername) throws Exception;
 	
 	public abstract ArrayList<Grade> filterGradesByCourseTitle(String title) throws Exception;
 	

@@ -31,10 +31,17 @@ public class FilterServiceImpl implements IFilterService {
 	private IProfessorRepo profRepo;
 	
 	@Override
-	public ArrayList<Grade> filterGradesByStudentId(long id) throws Exception {
+	public ArrayList<Grade> filterGradesByStudentId(long id, String sessionUsername) throws Exception {
 		if (id < 1) {
 			throw new Exception("ID can't be less than 1");
 		}
+		
+		Student sessionStudent = studRepo.findByUserUsername(sessionUsername);
+		
+		if (sessionStudent.getIds() != id) {
+			throw new Exception("User " + sessionUsername + "doesn't have permission");
+		}
+		
 		if (!studRepo.existsById(id)) {
 			throw new Exception("Student with id " + id + " does not exist");
 		}

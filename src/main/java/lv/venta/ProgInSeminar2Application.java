@@ -42,8 +42,25 @@ public class ProgInSeminar2Application {
 				Professor p3 = new Professor("Raita", "Rollande", Degree.phd);
 				profRepo.saveAll(Arrays.asList(p1, p2, p3));
 				
-				Student s1 = new Student("Mikus Valts", "Šarovs");
-				Student s2 = new Student("Kristers", "Dogudovs");
+				MyAuthority auth1 = new MyAuthority("ADMIN");
+				MyAuthority auth2 = new MyAuthority("USER");
+				authRepo.saveAll(Arrays.asList(auth1, auth2));
+				
+				PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+				
+				MyUser user1 = new MyUser("admin", encoder.encode("admin"), auth1);
+				MyUser user2 = new MyUser("Mikus", encoder.encode("123"), auth2);
+				MyUser user3 = new MyUser("testUser", encoder.encode("test"), auth1, auth2);
+				userRepo.saveAll(Arrays.asList(user1, user2, user3));
+				
+				auth1.addUser(user1);
+				auth1.addUser(user3);
+				auth2.addUser(user2);
+				auth2.addUser(user3);
+				authRepo.saveAll(Arrays.asList(auth1, auth2));
+				
+				Student s1 = new Student("Mikus Valts", "Šarovs", user2);
+				Student s2 = new Student("Kristers", "Dogudovs", user3);
 				studRepo.saveAll(Arrays.asList(s1, s2));
 				
 				Course c1 = new Course("Programmēšana JAVA", 4, p1);
@@ -64,23 +81,6 @@ public class ProgInSeminar2Application {
 				Grade g4 = new Grade(4, s2, c2);
 				Grade g5 = new Grade(10, s2, c1);
 				gradeRepo.saveAll(Arrays.asList(g1, g2, g3, g4, g5));
-				
-				MyAuthority auth1 = new MyAuthority("ADMIN");
-				MyAuthority auth2 = new MyAuthority("USER");
-				authRepo.saveAll(Arrays.asList(auth1, auth2));
-				
-				PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-				
-				MyUser user1 = new MyUser("admin", encoder.encode("admin"), auth1);
-				MyUser user2 = new MyUser("Normunds", encoder.encode("12345"), auth2);
-				MyUser user3 = new MyUser("testUser", encoder.encode("test"), auth1, auth2);
-				userRepo.saveAll(Arrays.asList(user1, user2, user3));
-				
-				auth1.addUser(user1);
-				auth1.addUser(user3);
-				auth2.addUser(user2);
-				auth2.addUser(user3);
-				authRepo.saveAll(Arrays.asList(auth1, auth2));
 			}
 		};
 	}

@@ -24,7 +24,7 @@ public class FilterController {
 			Model model, Authentication auth) {
 		System.out.println(auth.getName());
 		try {
-			model.addAttribute("package", filterService.filterGradesByStudentId(id));
+			model.addAttribute("package", filterService.filterGradesByStudentId(id, auth.getName()));
 			return "show-grades";
 		} catch (Exception e) {
 			model.addAttribute("package", e.getMessage());
