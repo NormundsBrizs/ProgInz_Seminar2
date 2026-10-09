@@ -1,6 +1,7 @@
 package lv.venta.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +14,15 @@ import lv.venta.service.IFilterService;
 @Controller
 @RequestMapping("/filter")
 public class FilterController {
-
+	
 	@Autowired
 	private IFilterService filterService;
 	
 	@GetMapping("/grade/student/{id}") // localhost:8080/filter/grade/student/1
-	public String getControllerGradesByStudentId(@PathVariable(name = "id") long id, Model model) {
+	public String getControllerGradesByStudentId(
+			@PathVariable(name = "id") long id,
+			Model model, Authentication auth) {
+		System.out.println(auth.getName());
 		try {
 			model.addAttribute("package", filterService.filterGradesByStudentId(id));
 			return "show-grades";
