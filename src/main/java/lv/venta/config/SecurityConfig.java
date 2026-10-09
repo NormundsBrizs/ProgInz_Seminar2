@@ -41,6 +41,7 @@ public class SecurityConfig {
 		http.authorizeHttpRequests(
 				auth->auth
 				.requestMatchers("/student/crud/all").permitAll()
+				.requestMatchers("/student/crud/add").hasAuthority("ADMIN")
 				.requestMatchers("/student/crud/delete/**").hasAuthority("ADMIN")
 				.requestMatchers("/filter/grade/student/**").hasAuthority("USER")
 				.requestMatchers("/filter/grade/course/**").hasAnyAuthority("USER", "ADMIN")

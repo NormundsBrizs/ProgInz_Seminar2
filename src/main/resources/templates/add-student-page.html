@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org" >
+<body>
+<h1>Lūdzu ievadi jaunu studentu:</h1>
+	<form method="post" th:object="${student}" th:action="@{/student/crud/add}"  >
+		
+		<p>Ievadi studenta vārdu</p>
+		<input type="text" th:field="*{name}"/> 
+		<p th:if="${#fields.hasErrors('name')}"  th:errors="*{name}"  ></p>
+		
+		<p>Ievadi studenta uzvārdu</p>
+		<input type="text" th:field="*{surname}"/> 
+		<p th:if="${#fields.hasErrors('surname')}"  th:errors="*{surname}"  ></p>
+		
+		<button type="submit" >Saglabāt studentu</button>		
+	</form>		
+</body>
+</html>
