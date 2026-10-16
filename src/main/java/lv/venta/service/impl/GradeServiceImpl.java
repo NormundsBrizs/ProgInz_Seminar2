@@ -44,14 +44,24 @@ public class GradeServiceImpl implements IGradeService {
 		Student stud = studRepo.findByNameAndSurname(gradeDTO.getStudentName(), gradeDTO.getStudentSurname());
 		Course course = courseRepo.findByTitle(gradeDTO.getCourseTitle());
 		
-		Grade grade = new Grade(gradeDTO.getGradeValue(), stud, course);
-		gradeRepo.save(grade);
+		if (!gradeRepo.existsByGrvalueAndStudentAndCourse(gradeDTO.getGradeValue(), stud, course)) {
+			Grade grade = new Grade(gradeDTO.getGradeValue(), stud, course);
+			gradeRepo.save(grade);
+		}
 	}
 
 	@Override
 	public void addNewGrades(ArrayList<GradeDTO> gradesDTO) throws Exception {
-		// TODO Auto-generated method stub
+		if (gradesDTO == null) {
+			throw new Exception("Invalid data");
+		}
+		if (gradesDTO.isEmpty()) {
+			throw new Exception("No data");
+		}
 		
+		for (GradeDTO tempG : gradesDTO) {
+			addNewGrade(tempG);
+		}
 	}
 
 }
