@@ -10,4 +10,6 @@ public interface IGradeService {
 	
 	public abstract void addNewGrades(ArrayList<GradeDTO> gradesDTO) throws Exception;
 
+	public abstract ArrayList<GradeDTO> retrieveAll() throws Exception;
+
 }
