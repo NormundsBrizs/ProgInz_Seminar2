@@ -55,9 +55,10 @@ public class StudentCRUDController {
 	}
 	
 	@PutMapping("/update/{id}") // localhost:8080/student/crud/update/1
-	public ResponseEntity<?> putUpdateStudentById(@PathVariable(name = "id") long id) {
+	public ResponseEntity<?> putUpdateStudentById(@PathVariable(name = "id") long id, @Valid @RequestBody Student student,
+			BindingResult result) {
 		try {
-			studService.updateById(id, null, null);
+			studService.updateById(id, student.getName(), student.getSurname());
 			return new ResponseEntity<ArrayList<Student>>(studService.retrieveAll(), HttpStatusCode.valueOf(200));
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatusCode.valueOf(409));

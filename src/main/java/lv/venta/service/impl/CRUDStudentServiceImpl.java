@@ -64,7 +64,25 @@ public class CRUDStudentServiceImpl implements ICRUDStudentService {
 
 	@Override
 	public void updateById(long id, String name, String surname) throws Exception {
+		if (studRepo.count() == 0) {
+			throw new Exception("No students found");
+		}
+		if (id < 1) {
+			throw new Exception("ID can't be below 1");
+		}
+		if (!studRepo.existsById(id)) {
+			throw new Exception("ID " + id + " doesn't exist");
+		}
 		
+		Student studentToUpdate = studRepo.findById(id).get();
+		
+		if (studentToUpdate.getName().equals(name) && studentToUpdate.getSurname().equals(surname)) {
+			throw new Exception("Student already has this name and surname");
+		}
+		
+		studentToUpdate.setName(name);
+		studentToUpdate.setSurname(surname);
+		studRepo.save(studentToUpdate);
 	}
 
 }
