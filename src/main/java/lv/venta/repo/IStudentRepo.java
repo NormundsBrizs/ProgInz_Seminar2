@@ -9,6 +9,10 @@ import lv.venta.model.Student;
 public interface IStudentRepo extends CrudRepository<Student, Long> {
 
 	ArrayList<Student> findByGradesGrvalueLessThan(int i);
+
+	boolean existsByNameAndSurname(String studentName, String studentSurname);
+
+	Student findByNameAndSurname(String studentName, String studentSurname);
 	
 	
 }
