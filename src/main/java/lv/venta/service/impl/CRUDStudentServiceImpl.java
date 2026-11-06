@@ -17,14 +17,15 @@ public class CRUDStudentServiceImpl implements ICRUDStudentService {
 
 	private final ICourseRepo ICourseRepo;
 
-	@Autowired
-	private IStudentRepo studRepo;
+	//@Autowired
+	private final IStudentRepo studRepo;
 	
 	@Autowired
 	private IGradeRepo gradeRepo;
 
-	CRUDStudentServiceImpl(ICourseRepo ICourseRepo) {
+	CRUDStudentServiceImpl(ICourseRepo ICourseRepo, IStudentRepo studRepo) {
 		this.ICourseRepo = ICourseRepo;
+		this.studRepo = studRepo;
 	}
 	
 	@Override
