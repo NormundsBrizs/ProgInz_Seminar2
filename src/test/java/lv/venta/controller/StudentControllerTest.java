@@ -2,9 +2,10 @@ package lv.venta.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -50,7 +51,11 @@ class StudentControllerTest {
 		ArrayList<Student> allStudents = new ArrayList<>(Arrays.asList(s1, s2));
 		
 		when(studService.retrieveAll()).thenReturn(allStudents);
-		mockMVC.perform(get("/student/crud/all")).andExpect(status().isOk());
+		mockMVC.perform(get("/student/crud/all"))
+		.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+		.andExpect(jsonPath(("$[0].name"), is("Normunds")))
+		.andExpect(jsonPath(("$[0].surname"), is("Brizs")))
+		.andExpect(status().isOk());
 		//.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
 		//.andExpect(jsonPath(("$[0].name").valueOf("Normunds"), null));
 	}
