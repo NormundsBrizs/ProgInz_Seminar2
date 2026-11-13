@@ -1,12 +1,16 @@
 package lv.venta.controller;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -31,11 +35,11 @@ class StudentControllerTest {
 
 	@Mock
 	private CRUDStudentServiceImpl studService;
-	
+
 	@InjectMocks
 	private StudentCRUDController studController;
 	private MockMvc mockMVC;
-	
+
 	@BeforeEach
 	public void initialize() {
 		MockitoAnnotations.openMocks(this);
@@ -43,21 +47,36 @@ class StudentControllerTest {
 		validator.afterPropertiesSet();
 		mockMVC = MockMvcBuilders.standaloneSetup(studController).setValidator(validator).build();
 	}
-	
+
 	@Test
 	public void testAllStudents() throws Exception {
 		Student s1 = new Student("Normunds", "Brizs");
 		Student s2 = new Student("Name", "Surname");
 		ArrayList<Student> allStudents = new ArrayList<>(Arrays.asList(s1, s2));
-		
+
 		when(studService.retrieveAll()).thenReturn(allStudents);
-		mockMVC.perform(get("/student/crud/all"))
-		.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-		.andExpect(jsonPath(("$[0].name"), is("Normunds")))
-		.andExpect(jsonPath(("$[0].surname"), is("Brizs")))
-		.andExpect(status().isOk());
-		//.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-		//.andExpect(jsonPath(("$[0].name").valueOf("Normunds"), null));
+
+		mockMVC.perform(get("/student/crud/all")).andExpect(status().isOk()).andExpect(view().name("show-all-students"))
+				.andExpect(model().attributeExists("package")).andExpect(model().attribute("package", allStudents));
+	}
+
+	@Test
+	public void testAddController() throws Exception {
+	    Student s1 = new Student("Normunds", "Brizs");
+	    Student s2 = new Student("Name", "Surname");
+	    Student s3 = new Student("Oskars", "Domigais");
+	    ArrayList<Student> allStudents = new ArrayList<>(Arrays.asList(s1, s2, s3));
+
+	    when(studService.create(any(Student.class))).thenReturn(s3);
+	    when(studService.retrieveAll()).thenReturn(allStudents);
+
+	    mockMVC.perform(post("/student/crud/add")
+	            .param("name", "Oskars")
+	            .param("surname", "Domigais"))
+	        .andExpect(status().is3xxRedirection())
+	        .andExpect(redirectedUrl("/student/crud/all"));
+
+	    verify(studService).create(any(Student.class));
 	}
 
 }

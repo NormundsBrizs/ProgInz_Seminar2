@@ -29,7 +29,7 @@ public class CRUDStudentServiceImpl implements ICRUDStudentService {
 	}
 	
 	@Override
-	public void create(Student newObject) throws Exception {
+	public Student create(Student newObject) throws Exception {
 		if (newObject == null) {
 			throw new Exception("No student given");
 		}
@@ -41,7 +41,7 @@ public class CRUDStudentServiceImpl implements ICRUDStudentService {
 			throw new Exception("Invalid data");
 		}
 		
-		studRepo.save(newObject);
+		return studRepo.save(newObject);
 	}
 
 	@Override
