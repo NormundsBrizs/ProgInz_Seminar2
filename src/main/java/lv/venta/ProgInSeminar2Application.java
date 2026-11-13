@@ -24,7 +24,7 @@ public class ProgInSeminar2Application {
 		SpringApplication.run(ProgInSeminar2Application.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	public CommandLineRunner saveDataInDB(IStudentRepo studRepo, IProfessorRepo profRepo, ICourseRepo courseRepo, IGradeRepo gradeRepo) {
 		return new CommandLineRunner() {
 			
@@ -49,5 +49,5 @@ public class ProgInSeminar2Application {
 				gradeRepo.saveAll(Arrays.asList(g1, g2, g3, g4));
 			}
 		};
-	}
+	}*/
 }
